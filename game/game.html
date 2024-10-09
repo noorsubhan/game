@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+  <style>
+    .container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#game button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Rock Paper Scissors</h1>
+    <div id="game">
+      <button id="rock">Rock</button>
+      <button id="paper">Paper</button>
+      <button id="scissors">Scissors</button>
+    </div>
+    <p id="result"></p>
+  </div>
+  <script>
+  
+  const buttons = document.querySelectorAll('button');
+const result = document.getElementById('result');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const playerSelection = button.id;
+    const computerSelection = computerPlay();
+    const roundResult = playRound(playerSelection, computerSelection);
+    result.textContent = roundResult;
+  });
+});
+
+function computerPlay() {
+  const choices = ['rock', 'paper', 'scissors'];
+  return choices[Math.floor(Math.random() * choices.length)];
+}
+
+function playRound(playerSelection, computerSelection) {
+  if (playerSelection === computerSelection) {
+    return "It's a tie!";
+  } else if (
+    (playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'paper' && computerSelection === 'rock') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper')
+  ) {
+    return `You win! ${playerSelection} beats ${computerSelection}.`;
+  } else {
+    return `You lose! ${computerSelection} beats ${playerSelection}.`;
+  }
+}
+
+
+
+  </script>
+</body>
+</html>
